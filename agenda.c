@@ -43,13 +43,56 @@ void lista (pessoa *topo){
 
 
 };
+void procura (pessoa *topo){
+    pessoa *aux;
+    char nome[50];
+    int flag=0;
+    aux = topo;
+    printf ("Digite nome a ser pesquisado: ");
+    fflush (stdin);
+    fgets(nome,50,stdin); 
+    if (aux == NULL){
+        printf ("Agenda Vazia!\n");
+    }else {
+        do{
+        if(strcmp(aux->nome,nome)==0){
+            printf (" Nome: %s Telefone: %s",aux->nome,aux->telefone);
+            flag++;
+        }aux = aux->prox;
+        }while (aux != NULL);
+        if (aux == NULL & flag == 0){
+                printf ("Pessoa nao encontrada, tente novamente\n");
+        };
+    };
+    free (aux);
+};
+void remover (pessoa **topo){
+     pessoa *aux;
+    char nome[50];
+    printf ("Digite nome a ser removido: ");
+    fflush (stdin);
+    fgets(nome,50,stdin); 
+    if (*topo == NULL){
+        printf ("Lista Vazia!\n");
+    }else{
+        for (aux = *topo; aux != NULL; aux = aux->prox){
+        	if (strcmp (aux->nome, nome) == 0){
+        	    aux = *topo;
+        	    (*topo) = aux->prox;
+                aux->prox = (*topo)->prox;
+                *topo = aux;
+                
+	         };
+        };
+    };
+};
 
 int main () {
    int op=0;
     pessoa *topo = NULL;
     while (op != 5){
         printf ("Menu Agenda");
-        printf ("\n 1- Inserir\n 2- Listar \n 3- Remover \n 4- Procurar \n 5- Sair\n");
+        printf ("\n 1- Inserir\n 2- Listar \n 3- Procurar \n 4- Remover \n 5- Sair\n");
         fflush (stdin);
         scanf ("%d",&op);
         switch (op)
@@ -62,10 +105,10 @@ int main () {
                 lista (topo);
                 break;
             case 3:
-                // remove (*topo);
+                procura (topo);
                 break;
             case 4:
-            // procura (*topo);
+               remover (&topo);
                 break;
             case 5:
                 break;
