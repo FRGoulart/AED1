@@ -33,7 +33,7 @@ void lista (pessoa *topo){
     pessoa *aux;
     aux = topo;
     if (aux == NULL){
-        printf ("Lista Vazia");
+        printf ("Agenda Vazia!\n");
     }else {
         do {
             printf (" Nome: %s Telefone: %s\n",aux->nome,aux->telefone);
@@ -48,17 +48,18 @@ void procura (pessoa *topo){
     char nome[50];
     int flag=0;
     aux = topo;
-    printf ("Digite nome a ser pesquisado: ");
-    fflush (stdin);
-    fgets(nome,50,stdin); 
+   
     if (aux == NULL){
         printf ("Agenda Vazia!\n");
     }else {
+         printf ("Digite nome a ser pesquisado: ");
+         fflush (stdin);
+         fgets(nome,50,stdin); 
         do{
-        if(strcmp(aux->nome,nome)==0){
-            printf (" Nome: %s Telefone: %s",aux->nome,aux->telefone);
-            flag++;
-        }aux = aux->prox;
+             if(strcmp(aux->nome,nome)==0){
+                 printf (" Nome: %s Telefone: %s",aux->nome,aux->telefone);
+                 flag++;
+             }aux = aux->prox;
         }while (aux != NULL);
         if (aux == NULL & flag == 0){
                 printf ("Pessoa nao encontrada, tente novamente\n");
@@ -68,21 +69,31 @@ void procura (pessoa *topo){
 };
 void remover (pessoa **topo){
      pessoa *aux;
+     int flag=0;
     char nome[50];
-    printf ("Digite nome a ser removido: ");
-    fflush (stdin);
-    fgets(nome,50,stdin); 
+    
     if (*topo == NULL){
         printf ("Lista Vazia!\n");
     }else{
+        printf ("Digite nome a ser removido: ");
+        fflush (stdin);
+        fgets(nome,50,stdin); 
         for (aux = *topo; aux != NULL; aux = aux->prox){
         	if (strcmp (aux->nome, nome) == 0){
         	    aux = *topo;
+                if (aux->prox == NULL){
+                    *topo = NULL;
+                    flag = 1;
+                }else{
         	    (*topo) = aux->prox;
                 aux->prox = (*topo)->prox;
                 *topo = aux;
-                
+                flag = 1;
+                };
 	         };
+        };
+        if ( aux == NULL & flag == 0){
+            printf ("Pessoa Não Encontrada\n");
         };
     };
 };
@@ -113,6 +124,7 @@ int main () {
             case 5:
                 break;
             default:
+                printf ("Opcao Invalida, tente novamente\n");
                 break;
     }
     };
