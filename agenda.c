@@ -40,7 +40,7 @@ void lista (pessoa *topo){
             aux = aux->prox;
         }while (aux != NULL);
     }
-
+free (aux);
 
 };
 void procura (pessoa *topo){
@@ -96,7 +96,8 @@ void remover (pessoa **topo){
             printf ("Pessoa Não Encontrada\n");
         };
     };
-};
+    free (aux);
+    };
 
 int main () {
    int op=0;
