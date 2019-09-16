@@ -10,7 +10,7 @@ typedef struct Agenda{
 }pessoa;
 
 typedef struct variaveis{ 
-    int op,i,npessoas;
+    int op,i,npessoas,flag;
     int sizebuf;
     char nome[50];
     char telefone[11];
@@ -27,17 +27,16 @@ void insere (){
     pvar= pbuffer;
     p = pbuffer + (pvar->npessoas)*sizeof(pessoa);
     printf ("Digite Dados Novo Contato:\n");
-    printf ("Digite Nome:\n");
+    printf ("Digite Nome:");
     fflush (stdin);
     fgets (p->nome,50,stdin);
-    printf ("Digite Telefone:\n");
+    printf ("Digite Telefone:");
     fflush (stdin);
     fgets (p->telefone,11,stdin);
     };
 void lista (){
-    pessoa *aux;
+    pessoa *aux=NULL;
     aux = p;
-    printf ("Npessoas: %d",pvar->npessoas);
     aux = aux -( (pvar->npessoas)-1);
     if (pvar->npessoas == 0){
         printf ("Agenda Vazia!\n");
@@ -49,31 +48,31 @@ void lista (){
     }
 free (aux);
 };
-/*void procura (pessoa *topo){
-    pessoa *aux;
-    char nome[50];
-    int flag=0;
-    aux = topo;
-
-    if (aux == NULL){
+void procura (){
+    pessoa *aux=NULL;
+    aux = p - ((pvar->npessoas)-1);
+    pvar->flag = 0;
+    if (pvar->npessoas == 0){
         printf ("Agenda Vazia!\n");
     }else {
          printf ("Digite nome a ser pesquisado: ");
          fflush (stdin);
-         fgets(nome,50,stdin);
-        do{
-             if(strcmp(aux->nome,nome)==0){
+         fgets(pvar->nome,50,stdin);
+        for (pvar->i=0;(pvar->npessoas)>(pvar->i);(pvar->i)++){
+             if(strcmp(pvar->nome,aux->nome)==0){
                  printf (" Nome: %s Telefone: %s",aux->nome,aux->telefone);
-                 flag++;
-             }aux = aux->prox;
-        }while (aux != NULL);
-        if (aux == NULL & flag == 0){
+                 pvar->flag++;
+                
+            }
+             aux++;
+       }
+        if (pvar->flag == 0){
                 printf ("Pessoa nao encontrada, tente novamente\n");
         };
-    };
-    free (aux);
+    }
+    free(aux);
 };
-void remover (pessoa **topo){
+/*void remover (pessoa **topo){
      pessoa *aux;
      int flag=0;
     char nome[50];
@@ -115,7 +114,7 @@ int main () {
     pvar->op = 0;
     pvar->npessoas = 0;
     while (pvar->op != 5){
-       
+       pvar->op = 0;
         printf ("Menu Agenda");
         printf ("\n 1- Inserir\n 2- Listar \n 3- Procurar \n 4- Remover \n 5- Sair\n");
         fflush (stdin);
@@ -130,18 +129,19 @@ int main () {
                lista ();
                 break;
             case 3:
-               // procura (topo);
+               procura ();
                 break;
             case 4:
               // remover (&topo);
                 break;
             case 5:
+                free(pbuffer);
+                exit (1);
                 break;
             default:
                 printf ("Opcao Invalida, tente novamente\n");
                 break;
-       };
-    };
+       }
+    }
     free(pbuffer);
-return 0;
-};
+}
