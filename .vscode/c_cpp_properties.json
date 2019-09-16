@@ -1,45 +1,16 @@
-{
-    "configurations": [
-        {
+
+    {
+        "configurations": [
+          {
             "name": "Win32",
-            "includePath": [
-                "{",
-                "    \"configurations\": [",
-                "        {",
-                "            \"name\": \"Win32\",",
-                "            \"includePath\": [",
-                "                \"${workspaceFolder}/**\",",
-                "                \"${vcpkgRoot}/x86-windows/include\"",
-                "            ],",
-                "            \"defines\": [",
-                "                \"_DEBUG\",",
-                "                \"UNICODE\",",
-                "                \"_UNICODE\"",
-                "            ],",
-                "            \"windowsSdkVersion\": \"10.0.17763.0\",",
-                "            \"compilerPath\": \"C:\\MinGW\\bin\\c++.exe\",",
-                "            \"cStandard\": \"c11\",",
-                "            \"cppStandard\": \"c++17\",",
-                "            \"intelliSenseMode\": \"${default}\"",
-                "        }",
-                "    ],",
-                "    \"version\": 4",
-                "}"
-            ],
-            "defines": [
-                "_DEBUG",
-                "UNICODE",
-                "_UNICODE"
-            ],
-            "windowsSdkVersion": "10.0.18362.0",
-            "compilerPath": "C:/MinGW/bin/gcc.exe",
+            "includePath": ["${workspaceFolder}/**", "${vcpkgRoot}/x86-windows/include"],
+            "defines": ["_DEBUG", "UNICODE", "_UNICODE"],
+            "windowsSdkVersion": "10.0.17763.0",
+            "compilerPath": "C:\\MinGW\\bin\\gcc.exe",
             "cStandard": "c11",
-            "cppStandard": "c++20",
-            "intelliSenseMode": "gcc-x64",
-            "compilerArgs": [
-                "-g"
-            ]
-        }
-    ],
-    "version": 4
-}
+            "cppStandard": "c++17",
+            "intelliSenseMode": "gcc-x64"
+          }
+        ],
+        "version": 4
+      }
