@@ -72,48 +72,47 @@ void procura (){
     }
     free(aux);
 };
-/*void remover (pessoa **topo){
-     pessoa *aux;
-     int flag=0;
-    char nome[50];
-
-    if (*topo == NULL){
-        printf ("Lista Vazia!\n");
+void remover (){
+     pessoa *aux,*troca;
+     troca = p;
+     aux= p -((pvar->npessoas)-1);
+    if (pvar->npessoas == 0){
+        printf ("Agenda Vazia!\n");
     }else{
         printf ("Digite nome a ser removido: ");
         fflush (stdin);
-        fgets(nome,50,stdin);
-        for (aux = *topo; aux != NULL; aux = aux->prox){
-        	if (strcmp (aux->nome, nome) == 0){
-        	    aux = *topo;
-                if (aux->prox == NULL){
-                    *topo = NULL;
-                    flag = 1;
-                }else{
-        	    (*topo) = aux->prox;
-                aux->prox = (*topo)->prox;
-                *topo = aux;
-                flag = 1;
-                };
-	         };
-        };
-        if ( aux == NULL & flag == 0){
-            printf ("Pessoa Não Encontrada\n");
-        };
-    };
+        fgets(pvar->nome,50,stdin);
+        pvar->flag =0;
+        for (pvar->i=0; pvar->i < pvar->npessoas; pvar->i++){
+        	if (strcmp (aux->nome,pvar->nome) == 0){
+        	    *aux = *troca ;
+                pvar->flag = 1;
+                pvar->npessoas--;
+                pbuffer = realloc (pbuffer,((pvar->sizebuf) - sizeof(pessoa)));
+                pvar = pbuffer;
+                p = pbuffer + (pvar->npessoas)*sizeof(pessoa);
+                }
+            aux = aux + 1;
+	    }
+    }
+    if ( pvar->flag == 0){
+        printf ("Pessoa Não Encontrada\n");
+    }
+    
     free (aux);
- };*/
+    free (troca);
+ }
 
 
 int main () {
-    pbuffer = malloc(sizeof (var));
-    if (pbuffer == NULL){
+    pbuffer = malloc(sizeof (var));   // Aloca o buffer com tamanho necessario para variaveis de controle, que ficam na struct
+    if (pbuffer == NULL){           // verifica se conseguiu alocar
         exit(1);
     };
-    pvar = pbuffer;
-    pvar->op = 0;
+    pvar = pbuffer;                 // faz o ponteiros das variaveis apontar para o inicio do buffer
+    pvar->op = 0;                   // inicia variaveis
     pvar->npessoas = 0;
-    while (pvar->op != 5){
+    while (pvar->op != 5){          // Fica rodando até o usuário decidir sair da agenda
        pvar->op = 0;
         printf ("Menu Agenda");
         printf ("\n 1- Inserir\n 2- Listar \n 3- Procurar \n 4- Remover \n 5- Sair\n");
@@ -126,13 +125,13 @@ int main () {
                 insere ();
                 break;
             case 2:
-               lista ();
+                lista ();
                 break;
             case 3:
-               procura ();
+                procura ();
                 break;
             case 4:
-              // remover (&topo);
+                remover ();
                 break;
             case 5:
                 free(pbuffer);
@@ -143,5 +142,5 @@ int main () {
                 break;
        }
     }
-    free(pbuffer);
+   
 }
