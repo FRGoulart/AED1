@@ -73,12 +73,13 @@ void procura (){
     free(aux);
 };
 void remover (){
-     pessoa *aux,*troca;
-     troca = p;
-     aux= p -((pvar->npessoas)-1);
+     
     if (pvar->npessoas == 0){
         printf ("Agenda Vazia!\n");
     }else{
+          pessoa *aux,*troca;
+         troca = p;
+        aux= p -((pvar->npessoas)-1);
         printf ("Digite nome a ser removido: ");
         fflush (stdin);
         fgets(pvar->nome,50,stdin);
@@ -94,13 +95,12 @@ void remover (){
                 }
             aux = aux + 1;
 	    }
-    }
-    if ( pvar->flag == 0){
+        free (aux);
+        free (troca);
+        if ( pvar->flag == 0){
         printf ("Pessoa Não Encontrada\n");
-    }
-    
-    free (aux);
-    free (troca);
+        }
+    } 
  }
 
 
